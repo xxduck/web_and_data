@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block total %}
+    <div></div>
+{% endblock %}
+{% block body %}
+<div class="w1200">
+    <div class="col">
+        <div class="box box1200">
+            <div class="boxTit">
+                <h1>24小时成交量排行榜人民币(CNY)</h1>
+            </div>
+            <div class="boxTools">
+                <div class="slideBtn unit">
+                    <button>人民币(CNY)</button>
+                    <ul style="">
+                        <li class="pointer"><a href="#native" class="price-toggle" data-currency="native">平台价格</a></li>
+                        <li><a href="#CNY" class="price-toggle" data-currency="cny">人民币(CNY)</a></li>
+                        <li><a href="#USD" class="price-toggle" data-currency="usd">美元(USD)</a></li>
+                        <li><a href="#BTC" class="price-toggle" data-currency="btc">比特币(BTC)</a></li>
+                        <li><a href="#AUD" class="price-toggle" data-currency="aud">澳元(AUD)</a></li>
+                        <li><a href="#JPY" class="price-toggle" data-currency="jpy">日元(JPY)</a></li>
+                        <li><a href="#ETH" class="price-toggle" data-currency="eth">以太坊(ETH)</a></li>
+                        <li><a href="#KRW" class="price-toggle" data-currency="krw">韩币(KRW)</a></li>
+                        <li><a href="#CAD" class="price-toggle" data-currency="cad">加元(CAD)</a></li>
+                        <li><a href="#CHF" class="price-toggle" data-currency="chf">法郎(CHF)</a></li>
+                        <li><a href="#INR" class="price-toggle" data-currency="inr">卢比(INR)</a></li>
+                        <li><a href="#RUB" class="price-toggle" data-currency="rub">卢布(RUB)</a></li>
+                        <li><a href="#EUR" class="price-toggle" data-currency="eur">欧元(EUR)</a></li>
+                        <li><a href="#GBP" class="price-toggle" data-currency="gbp">英镑(GBP)</a></li>
+                        <li><a href="#HKD" class="price-toggle" data-currency="hkd">港币(HKD)</a></li>
+                        <li><a href="#BRL" class="price-toggle" data-currency="brl">巴西雷亚尔(BRL)</a></li>
+                        <li><a href="#IDR" class="price-toggle" data-currency="idr">印尼盾(IDR)</a></li>
+                        <li><a href="#MXN" class="price-toggle" data-currency="mxn">比索(MXN)</a></li>
+                    </ul>
+                </div>
+                <div style="display:none" id="currency-exchange-rates" data-cny="0.15188566047479457" data-usd="1"
+                     data-btc="4810.12" data-aud="0.7781749928796988" data-jpy="0.008891536590895956"
+                     data-eth="299.78854034240851" data-krw="0.000879579033474579" data-cad="0.7993125911715925"
+                     data-chf="1.024793862714515" data-inr="0.015319683495338987" data-rub="0.017253635340966342"
+                     data-eur="1.1814172517635606" data-gbp="1.319548450520232" data-hkd="0.1281522736071546"
+                     data-brl="0.3145247530980688" data-idr="7.402780850332814e-05"
+                     data-mxn="0.05319726183053906"></div>
+            </div>
+            <div class="boxContain">
+                <div class="vol-rank">
+                    {% for foo in body %}
+                    <div class="tit">
+                        <div class="rank">NO.{{ loop.index }}</div>
+                        <a class="coin" href="/currencies/{{ foo.name }}/"><img
+                                src="{{ foo.img_url }}"
+                                alt="{{ foo.name_show }}">{{ foo.name_show }}({{ foo.rose }})</a>
+                        <div class="data">
+                            <small>平均成交量</small>
+                            <span class="volume" data-usd="{{ foo.volume_usd }}" data-cny="{{ foo.volume_cny }}"
+                                  data-btc="{{ foo.volume_btc }}">{{ foo.volume }}</span></div>
+                        <div class="data">
+                            <small>平均价格</small>
+                            <span class="price" data-usd="{{ foo.price_usd }}" data-cny="{{ foo.price_cny }}" data-btc="{{ foo.price_btc }}">{{ foo.price }}</span></div>
+                        <a class="more" title="查看更多" href="/currencies/{{ foo.name }}/"></a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>交易平台</th>
+                            <th>交易对</th>
+                            <th>成交量(24小时)</th>
+                            <th>价格</th>
+                            <th>占比</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ticker in footer(foo.name) %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>
+                                <a href="/exchange/{{ ticker.name_plat }}/" target="_blank"> {{ ticker.name_plat }}</a>
+                            </td>
+                            <td><a href="{{ ticker.url }}" rel="nofollow" target="_blank">{{ ticker.arb }}</a></td>
+                            <td class="volume" data-usd="{{ ticker.volume_usd }}"
+                                data-cny="{{ ticker.volume_cny }}" data-btc="{{ ticker.volume_btc }}"
+                                data-native="{{ ticker.volume_native }}">{{ ticker.volume }}
+                            </td>
+                            <td class="price" data-usd="{{ ticker.price_usd }}" data-cny="{{ ticker.price_cny }}" data-btc="{{ ticker.price_btc }}" data-native="{{ ticker.price_native }}">{{ ticker.price }}
+                            </td>
+                            <td>{{ ticker.percent }}</td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+                </div>
+                <div class="m30"></div>
+            </div>
+            <div class="loading2" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

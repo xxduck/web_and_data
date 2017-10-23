@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% block top %}
+    <div></div>
+{% endblock %}
+{% block total %}
+<div></div>
+{% endblock %}
+{% block body %}
+    <div class="w1200">
+        <div class="col">
+            <div class="box box1200">
+                <div class="boxContain">
+                    <div class="marketinfo">
+                        <div class="cover">
+                            <img src="{{ body.img_url }}"
+                                 alt="{{ body.name_zh }}的Logo">
+                        </div>
+                        <div class="info" style="width: 660px;">
+                            <input type="hidden" value="bitmex" id="HSiteCode">
+                            <h1 style="display: inline-block">{{ body.name_zh }}</h1>
+                            <div class="star star{{ body.star }}" style="display: inline-block">{{ body.star }}</div>
+                            <div class="text">
+                                {{ body.dsc }}
+                            </div>
+                            <div class="tag">
+                                <a href="/exchange/?code=sser&amp;type=2"><i class="qihuo"></i>{{ body.type }}</a>
+                            </div>
+                            <div class="web">
+                                <span>官网地址：<a rel="nofollow" target="_blank" href="{{ body.url }}">{{ body.url }}</a></span>
+                                <span>
+                                        <b>国家：</b>
+                                        <a href="/exchange/?code=sser" target="_blank"> {{ body.nation }}</a>
+                                    </span>
+
+                                <span>
+                                                                                                             </span>
+                            </div>
+                        </div>
+
+                        <div class="vol">
+                            <p>24小时平台成交量：</p>
+                            <div class="bprice" style="margin-top: 0">
+                                <div class="num">¥4,667,793,333 <span class="tag-rank">排名<b>NO.1</b></span>
+                                </div>
+                                <div class="num2">
+                                    <span>$701,301,000</span><span>145,794BTC  </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="box box845">
+                <div class="tabTit">
+                    <h2 class="tit active" style="width: 130px;">行情</h2>
+                    <h2 class="tit" style="width: 130px;">平台简介</h2>
+                    <h2 class="tit" style="width: 130px;">费用说明</h2>
+                </div>
+                <div class="boxContain" style="min-height:840px;">
+                    <div class="tabBody">
+                        <div class="m15"></div>
+                        <div class="slideBtn unit">
+                            <button>人民币(CNY)</button>
+                            <ul style="">
+                                <li class="pointer"><a href="#native" class="price-toggle"
+                                                       data-currency="native">平台价格</a></li>
+                                <li><a href="#CNY" class="price-toggle" data-currency="cny">人民币(CNY)</a></li>
+                                <li><a href="#USD" class="price-toggle" data-currency="usd">美元(USD)</a></li>
+                                <li><a href="#BTC" class="price-toggle" data-currency="btc">比特币(BTC)</a></li>
+                                <li><a href="#AUD" class="price-toggle" data-currency="aud">澳元(AUD)</a></li>
+                                <li><a href="#JPY" class="price-toggle" data-currency="jpy">日元(JPY)</a></li>
+                                <li><a href="#ETH" class="price-toggle" data-currency="eth">以太坊(ETH)</a></li>
+                                <li><a href="#KRW" class="price-toggle" data-currency="krw">韩币(KRW)</a></li>
+                                <li><a href="#CAD" class="price-toggle" data-currency="cad">加元(CAD)</a></li>
+                                <li><a href="#CHF" class="price-toggle" data-currency="chf">法郎(CHF)</a></li>
+                                <li><a href="#INR" class="price-toggle" data-currency="inr">卢比(INR)</a></li>
+                                <li><a href="#RUB" class="price-toggle" data-currency="rub">卢布(RUB)</a></li>
+                                <li><a href="#EUR" class="price-toggle" data-currency="eur">欧元(EUR)</a></li>
+                                <li><a href="#GBP" class="price-toggle" data-currency="gbp">英镑(GBP)</a></li>
+                                <li><a href="#HKD" class="price-toggle" data-currency="hkd">港币(HKD)</a></li>
+                                <li><a href="#BRL" class="price-toggle" data-currency="brl">巴西雷亚尔(BRL)</a></li>
+                                <li><a href="#IDR" class="price-toggle" data-currency="idr">印尼盾(IDR)</a></li>
+                                <li><a href="#MXN" class="price-toggle" data-currency="mxn">比索(MXN)</a></li>
+                            </ul>
+                        </div>
+                        <div style="display:none" id="currency-exchange-rates" data-cny="0.15154729791167823"
+                             data-usd="1" data-btc="4806.57" data-aud="0.7784524365561264"
+                             data-jpy="0.00887687132131495" data-eth="297.27584414218018"
+                             data-krw="0.0008787140310482724" data-cad="0.798686958639996" data-chf="1.0221082003740916"
+                             data-inr="0.015326844968963138" data-rub="0.01717572657617349"
+                             data-eur="1.1770494195969312" data-gbp="1.3167649192757265" data-hkd="0.1281271020852686"
+                             data-brl="0.3136467710064925" data-idr="7.406807291421084e-05"
+                             data-mxn="0.05363540795091287"></div>
+                        <div class="m15"></div>
+                        <table class="table noBg">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名称</th>
+                                <th>交易对</th>
+                                <th>价格</th>
+                                <th>成交量</th>
+                                <th>占比</th>
+                                <th>更新时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for ticker in footer(body.name) %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td><a href="{{ ticker.url }}" target="_blank">
+                                    <img src="{{ ticker.img_url }}"
+                                         alt="{{ ticker.name_zh }}">
+                                    {{ ticker.name_zh }}</a></td>
+                                <td><a href="https://www.bitmex.com/" target="_blank"> {{ ticker.arb }}</a></td>
+                                <td class="price" data-usd="4803" data-cny="31694" data-btc="1" data-native="4803">
+                                    {{ ticker.price }}
+                                </td>
+                                <td class="volume" data-usd="701844000" data-cny="4631187818" data-btc="146262"
+                                    data-native="146123">{{ ticker.volume }}
+                                </td>
+                                <td>{{ ticker.percent }}</td>
+                                <td>{{ ticker.time }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tabBody" style="display: none;">
+                        <section class="artBox">
+                            {{ body.abstract }}</section>
+                    </div>
+                    <div class="tabBody" style="display: none;">
+                        <section class="artBox">
+                            <p></p>
+                            <p>{{ body.fee }}</p>
+                            <p></p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="box box340">
+                <div class="boxTit">
+                    <h2>币种成交量占比</h2>
+                </div>
+                <div class="boxContain loading" style="height:430px">
+                    <div class="m15"></div>
+                    <div class="char" id="piechart_coinvol" data-highcharts-chart="0">
+                        <div id="highcharts-re1c6be-0" class="highcharts-container "
+                             style="position: relative; overflow: hidden; width: 310px; height: 400px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                            <svg version="1.1" class="highcharts-root"
+                                 style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;"
+                                 xmlns="http://www.w3.org/2000/svg" width="310" height="400" viewBox="0 0 310 400">
+                                <desc>Created with Highcharts 5.0.14</desc>
+                                <defs>
+                                    <clipPath id="highcharts-re1c6be-1">
+                                        <rect x="0" y="0" width="290" height="334" fill="none"></rect>
+                                    </clipPath>
+                                </defs>
+                                <rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="310" height="400"
+                                      rx="0" ry="0"></rect>
+                                <rect fill="none" class="highcharts-plot-background" x="10" y="10" width="290"
+                                      height="334"></rect>
+                                <rect fill="none" class="highcharts-plot-border" x="10" y="10" width="290"
+                                      height="334"></rect>
+                                <g class="highcharts-series-group">
+                                    <g class="highcharts-series highcharts-series-0 highcharts-pie-series highcharts-color-undefined highcharts-tracker"
+                                       transform="translate(10,10) scale(1 1)" style="cursor:pointer;">
+                                        <path fill="#7cb5ec"
+                                              d="M 144.97250411750116 32.00000280008726 A 135 135 0 1 1 144.81248770836032 32.00013022546841 M 145 167 A 0 0 0 1 0 145 167 "
+                                              transform="translate(0,0)" stroke="#ffffff" stroke-width="1"
+                                              stroke-linejoin="round"
+                                              class="highcharts-point highcharts-color-0"></path>
+                                    </g>
+                                    <g class="highcharts-markers highcharts-series-0 highcharts-pie-series highcharts-color-undefined "
+                                       transform="translate(10,10) scale(1 1)"></g>
+                                </g>
+                                <g class="highcharts-legend" transform="translate(97,356)">
+                                    <rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0"
+                                          width="116" height="29" visibility="visible"></rect>
+                                    <g>
+                                        <g>
+                                            <g class="highcharts-legend-item highcharts-pie-series highcharts-color-0"
+                                               transform="translate(8,3)">
+                                                <text x="21"
+                                                      style="color:#666;font-size:12px;font-weight:normal;cursor:pointer;fill:#666;"
+                                                      text-anchor="start" y="15">
+                                                    <tspan>BTC</tspan>
+                                                </text>
+                                                <rect x="2" y="4" width="12" height="12" fill="#7cb5ec"
+                                                      class="highcharts-point"></rect>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                                <text x="300" class="highcharts-credits" text-anchor="end"
+                                      style="cursor:pointer;color:#999999;font-size:9px;fill:#999999;" y="395">
+                                    Highcharts.com
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="m15"></div>
+                </div>
+            </div>
+
+            <div class="box box340">
+                <div class="boxTit">
+                    <h2>平台最新公告</h2>
+                </div>
+                <div class="boxContain">
+                    <ul class="artList">
+
+                        <div class="nothing"></div>
+
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

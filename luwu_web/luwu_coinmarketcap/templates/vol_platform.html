@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block total %}
+    <div></div>
+{% endblock %}
+{% block body %}
+    <div class="w1200">
+        <div class="col">
+            <div class="box box1200">
+                <div class="boxTit">
+                    <h1>交易平台24小时成交量排行榜</h1>
+                </div>
+                <div class="boxTools">
+                    <div class="pageList">
+                        <a href="/vol/exchange/" class="active">全部</a>
+                        <a href="/vol/exchange/fees/">需手续费</a>
+                        <a href="/vol/exchange/nofees/">无手续费</a>
+                    </div>
+                    <div class="slideBtn unit">
+                        <button>人民币(CNY)</button>
+                        <ul>
+                            <li class="pointer"><a href="#native" class="price-toggle" data-currency="native">平台价格</a>
+                            </li>
+                            <li><a href="#CNY" class="price-toggle" data-currency="cny">人民币(CNY)</a></li>
+                            <li><a href="#USD" class="price-toggle" data-currency="usd">美元(USD)</a></li>
+                            <li><a href="#BTC" class="price-toggle" data-currency="btc">比特币(BTC)</a></li>
+                            <li><a href="#AUD" class="price-toggle" data-currency="aud">澳元(AUD)</a></li>
+                            <li><a href="#JPY" class="price-toggle" data-currency="jpy">日元(JPY)</a></li>
+                            <li><a href="#ETH" class="price-toggle" data-currency="eth">以太坊(ETH)</a></li>
+                            <li><a href="#KRW" class="price-toggle" data-currency="krw">韩币(KRW)</a></li>
+                            <li><a href="#CAD" class="price-toggle" data-currency="cad">加元(CAD)</a></li>
+                            <li><a href="#CHF" class="price-toggle" data-currency="chf">法郎(CHF)</a></li>
+                            <li><a href="#INR" class="price-toggle" data-currency="inr">卢比(INR)</a></li>
+                            <li><a href="#RUB" class="price-toggle" data-currency="rub">卢布(RUB)</a></li>
+                            <li><a href="#EUR" class="price-toggle" data-currency="eur">欧元(EUR)</a></li>
+                            <li><a href="#GBP" class="price-toggle" data-currency="gbp">英镑(GBP)</a></li>
+                            <li><a href="#HKD" class="price-toggle" data-currency="hkd">港币(HKD)</a></li>
+                            <li><a href="#BRL" class="price-toggle" data-currency="brl">巴西雷亚尔(BRL)</a></li>
+                            <li><a href="#IDR" class="price-toggle" data-currency="idr">印尼盾(IDR)</a></li>
+                            <li><a href="#MXN" class="price-toggle" data-currency="mxn">比索(MXN)</a></li>
+                        </ul>
+                    </div>
+                    <div id="currency-exchange-rates" data-cny="0.15181878909333818" data-usd="1" data-btc="5043.62"
+                         data-aud="0.7815974444889955" data-jpy="0.008900938782013338" data-eth="305.69312902142332"
+                         data-krw="0.0008820461707068057" data-cad="0.8035949624238996" data-chf="1.028835163116671"
+                         data-inr="0.015350372246526979" data-rub="0.017315417647873668" data-eur="1.1876230674403634"
+                         data-gbp="1.3258853931183896" data-hkd="0.12812358903897572" data-brl="0.3153380423814329"
+                         data-idr="7.406418355397474e-05" data-mxn="0.053481598586374385"></div>
+                </div>
+                {% for foo in body %}
+                    <div class="boxContain">
+                        <div class="vol-rank">
+                            <div class="tit">
+                                <div class="rank">NO.{{ loop.index }}</div>
+                                <div class="market">
+                                    <a target="_blank" href="/exchange/{{ foo.name }}/" class="pic">
+                                        <img src="{{ foo.img_url }}"
+                                             alt="{{ foo.name_zh }}">
+                                    </a>
+                                    <div class="info">
+                                        <a class="name" target="_blank"
+                                           href="/exchange/{{ foo.name }}/">{{ foo.name }}</a>
+                                        <div class="star star{{ foo.star }}"></div>
+                                    </div>
+                                </div>
+                                <div class="data">
+                                    <small>总成交量</small>
+                                    <span class="volume" data-usd="357879589.16" data-btc="70693.85"
+                                          data-cny="2348105516.33">{{ foo.volume }}</span>
+                                </div>
+                                <a class="more" title="查看更多" target="_blank" href="/exchange/{{ foo.name }}/"></a>
+                            </div>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>#</th>
+                                    <th>名称</th>
+                                    <th>交易对</th>
+                                    <th>成交量(24小时)</th>
+                                    <th>价格</th>
+                                    <th>成交量占比</th>
+                                </tr>
+                                {% for ticker in footer(foo.name) %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>
+                                            <a href="/currencies/{{ ticker.quote }}/" target="_blank">
+                                                {{ ticker.name_zh }}-{{ ticker.name }}
+                                            </a>
+                                        </td>
+                                        <td><a href="{{ ticker.url }}" rel="nofollow"
+                                               target="_blank">{{ ticker.arb }}</a></td>
+                                        <td class="volume" data-usd="181457900" data-cny="1195226898" data-btc="35580"
+                                            data-native="35580">{{ ticker.volume }}
+                                        </td>
+                                        <td class="price" data-usd="5100" data-cny="33593" data-btc="1"
+                                            data-native="5,100">
+                                            {{ ticker.price }}
+                                        </td>
+                                        <td>{{ ticker.percent }}</td>
+
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="m30"></div>
+                    </div>
+                {% endfor %}
+                <div class="loading2" style="display:none"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

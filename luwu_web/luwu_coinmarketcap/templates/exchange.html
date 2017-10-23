@@ -1,0 +1,134 @@
+﻿{% extends "base.html" %}
+{% block top %}
+    <div></div>
+{% endblock %}
+{% block total %}
+<div></div>
+{% endblock %}
+{% block body %}
+    <div class="w1200">
+        <div class="col">
+            <div class="box box1200">
+                <div class="boxTit">
+                    <h1>数字货币交易平台列表</h1>
+                </div>
+                <div class="boxTools">
+                    <div class="toolLable">排序</div>
+                    <div class="pageList pageList-left">
+                        <a href="/exchange/" class="btn btn-default dropdown-toggle" aria-expanded="false">
+                            默认
+                        </a>
+                        <a href="/exchange/?filter=star" class="btn btn-default dropdown-toggle" aria-expanded="false">
+                            星级
+                        </a>
+                        <a href="/exchange/?filter=name" class="btn btn-default dropdown-toggle" aria-expanded="false">
+                            名称
+                        </a>
+                        <a href="/exchange/?filter=pair" class="btn btn-default dropdown-toggle" aria-expanded="false">
+                            交易对数量
+                        </a>
+                    </div>
+                    <div class="toolLable" style="margin-left: 15px;">筛选</div>
+                    <div class="slideBtn unit">
+                        <button>国家</button>
+                        <ul style="">
+                            <li><a href="/exchange/">全部</a></li>
+                            <li><a href="/exchange/?code=cn">中国(39)</a></li>
+                            <li><a href="/exchange/?code=uk">英国(20)</a></li>
+                            <li><a href="/exchange/?code=us">美国(10)</a></li>
+                            <li><a href="/exchange/?code=jp">日本(9)</a></li>
+                            <li><a href="/exchange/?code=hongkong">中国香港(6)</a></li>
+                            <li><a href="/exchange/?code=kr">韩国(4)</a></li>
+                            <li><a href="/exchange/?code=pola">波兰(2)</a></li>
+                            <li><a href="/exchange/?code=can">加拿大(4)</a></li>
+                            <li><a href="/exchange/?code=thailand">泰国(1)</a></li>
+                            <li><a href="/exchange/?code=aus">澳洲(4)</a></li>
+                            <li><a href="/exchange/?code=india">印度(1)</a></li>
+                            <li><a href="/exchange/?code=de">德国(1)</a></li>
+                            <li><a href="/exchange/?code=wkl">乌克兰(1)</a></li>
+                            <li><a href="/exchange/?code=newzeland">新西兰(1)</a></li>
+                            <li><a href="/exchange/?code=els">俄罗斯(1)</a></li>
+                            <li><a href="/exchange/?code=danmark">丹麦(2)</a></li>
+                            <li><a href="/exchange/?code=holland">荷兰(3)</a></li>
+                            <li><a href="/exchange/?code=sser">塞舌尔(2)</a></li>
+                            <li><a href="/exchange/?code=spain">西班牙(1)</a></li>
+                            <li><a href="/exchange/?code=malta">马耳他(1)</a></li>
+                            <li><a href="/exchange/?code=tsny">坦桑尼亚(1)</a></li>
+                            <li><a href="/exchange/?code=mesica">墨西哥(1)</a></li>
+                            <li><a href="/exchange/?code=switzerland">瑞士(1)</a></li>
+                            <li><a href="/exchange/?code=teq">土耳其(3)</a></li>
+                            <li><a href="/exchange/?code=brazil">巴西(3)</a></li>
+                            <li><a href="/exchange/?code=ysl">以色列(1)</a></li>
+                            <li><a href="/exchange/?code=kldy">克罗地亚(1)</a></li>
+                            <li><a href="/exchange/?code=singepo">新加坡(1)</a></li>
+                            <li><a href="/exchange/?code=zl">智利(1)</a></li>
+                            <li><a href="/exchange/?code=nanfei">南非(1)</a></li>
+                            <li><a href="/exchange/?code=ydl">意大利(1)</a></li>
+                            <li><a href="/exchange/?code=unknow">未知(65)</a></li>
+                        </ul>
+                    </div>
+                    <div class="slideBtn">
+                        <button>类型</button>
+                        <ul style="">
+                            <li><a href="/exchange/">全部</a></li>
+                            <li><a href="/exchange/?type=1">现货</a></li>
+                            <li><a href="/exchange/?type=2">期货</a></li>
+                        </ul>
+                    </div>
+                    <div class="pageList">
+                        <a href="#" class="btn btn-white">&lt;</a> <a href="#" class="btn btn-white active">1</a><a
+                            class="btn btn-white" href="/exchange/list_2.html">2</a><a class="btn btn-white"
+                                                                                       href="/exchange/list_3.html">3</a><a
+                            class="btn btn-white" href="/exchange/list_4.html">4</a><a class="btn btn-white"
+                                                                                       href="/exchange/list_5.html">5</a><a
+                            href="#" class="btn btn-white">...</a><a class="btn btn-white"
+                                                                     href="/exchange/list_11.html">11</a><a
+                            class="btn btn-white" href="/exchange/list_2.html">&gt;</a>
+                    </div>
+                </div>
+
+                <ul class="plantList">
+                    {% for foo in body %}
+                    <li>
+                        <div class="con">
+                            <a target="_blank" href="/exchange/{{ foo.name }}/" class="pic">
+                                <img src="{{ foo.img_url }}"
+                                     alt="{{ foo.name }}的logo">
+                            </a>
+                            <div class="info">
+                                <div class="tit"><a target="_blank" href="/exchange/{{ foo.name }}/"><b>{{ foo.name_zh }}</b></a></div>
+                                <div class="star star{{ foo.star }}"></div>
+                                <div class="des">
+                                    {{ foo.desc }}
+                                </div>
+                                <div class="detal">
+                                    交易对:<a target="_blank" href="/exchange/{{ foo.name }}/">1</a>
+                                    <i class="space"></i>国家:<a href="/exchange/?code=sser">{{ foo.nation }}</a><a
+                                        href="\&quot;{0}\&quot;"></a><i class="space"></i>
+                                    成交量(24h):<a href="/exchange/{{ foo.name }}/">¥444,835万</a>
+                                </div>
+                                <div class="tag">
+                                    <a href="/exchange/?type={{ foo.type }}"> <i class="qihuo" title="支持期货"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+{% endfor %}
+                </ul>
+                <div class="boxTools">
+
+                    <div class="pageList">
+                        <a href="#" class="btn btn-white">&lt;</a> <a href="#" class="btn btn-white active">1</a><a
+                            class="btn btn-white" href="/exchange/list_2.html">2</a><a class="btn btn-white"
+                                                                                       href="/exchange/list_3.html">3</a><a
+                            class="btn btn-white" href="/exchange/list_4.html">4</a><a class="btn btn-white"
+                                                                                       href="/exchange/list_5.html">5</a><a
+                            href="#" class="btn btn-white">...</a><a class="btn btn-white"
+                                                                     href="/exchange/list_11.html">11</a><a
+                            class="btn btn-white" href="/exchange/list_2.html">&gt;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
