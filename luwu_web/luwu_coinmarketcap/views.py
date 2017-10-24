@@ -1,11 +1,11 @@
 from flask import render_template
-from luwu_coinmarketcap import models
+from luwu_coinmarketcap.models import Luwu
 from luwu_coinmarketcap import app
 
 
 @app.route('/index/')
 def index():
-    return render_template('index.html', body=models.index())
+    return render_template('index.html', body=Luwu().index())
 
 
 @app.route('/currencies/<name>/')
@@ -16,7 +16,7 @@ def symbol(name):
     :param name:
     :return:
     """
-    return render_template('symbol.html', body=models.symbol(name), footer=models.symbol_base_info(name), table=models.ticker_symbol)
+    return render_template('symbol.html', body=Luwu().symbol(name), footer=Luwu().symbol_base_info(name), table=Luwu().ticker_symbol)
 
 
 @app.route('/exchange/')
@@ -25,7 +25,7 @@ def exchange():
     交易平台列表页
     :return:
     """
-    return render_template('exchange.html', body=models.index_platform())
+    return render_template('exchange.html', body=Luwu().index_platform())
 
 
 @app.route('/exchange/<name>/')
@@ -37,7 +37,7 @@ def platform(name):
     :return:
     """
 
-    return render_template('platform.html', body=models.platform(name), footer=models.ticker_platform)
+    return render_template('platform.html', body=Luwu().platform(name), footer=Luwu().ticker_platform)
 
 
 @app.route('/vol/')
@@ -47,7 +47,7 @@ def vol():
     :param
     :return:
     """
-    return render_template('vol.html', body=models.sort_by_symbol(), footer=models.ticker_symbol)
+    return render_template('vol.html', body=Luwu().sort_by_symbol(), footer=Luwu().ticker_symbol)
 
 
 @app.route('/vol/exchange/')
@@ -56,7 +56,7 @@ def vol_platform():
     :param
     :return:
     """
-    return render_template('vol_platform.html', body=models.sort_by_platform(), footer=models.ticker_platform)
+    return render_template('vol_platform.html', body=Luwu().sort_by_platform(), footer=Luwu().ticker_platform)
 
 
 if __name__ == '__main__':

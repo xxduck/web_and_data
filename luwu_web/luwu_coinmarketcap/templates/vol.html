@@ -70,7 +70,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for ticker in footer(foo.name) %}
+                        {% for ticker in footer(foo.name)[:10] %}
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>

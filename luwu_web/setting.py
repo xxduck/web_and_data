@@ -13,5 +13,5 @@
 @desc:
  
 '''
-debug = True
+debug = False
 database_name = 'feixiaohao'
