@@ -44,7 +44,7 @@ def platform_info():
     platform = Platform()
     mongo = Mongo()
     mongo.drop(collection='platform')
-    for plat in mongo.read(collection='platform_base'):
+    for plat in mongo.read(collection='platform_entrance'):
         for i in platform.platform(plat['url']):
             print(i)
             mongo.write(collection='platform', data=i)

@@ -12,7 +12,7 @@ from fake_useragent import UserAgent
 from scrapy.selector import Selector
 
 
-class Symbol(object):
+class Ticker(object):
     """
     通过url获取详情页币种信息
     """
@@ -21,9 +21,10 @@ class Symbol(object):
     def __init__(self):
         self.ua = UserAgent()
 
-    def symbol(self, url, time):
+    def ticker(self, url, num):
         html = requests.get(url, headers={'User-Agent': self.ua.random})
         response = Selector(text=html.text)
+        header_info = response.xpath('//div[@class="box box1200"]/div/div/div[@class="info"]')
         response = response.xpath('//table[@class="table noBg"]/tbody/tr')
         for info in response:
             # 有些网页arb标签,name标签有特殊情况
@@ -34,7 +35,6 @@ class Symbol(object):
                 arb = info.xpath('./td[3]/text()').extract_first()
             if len(name_base.split('-')) == 1:
                 name_base = 'None-{}'.format(name_base)
-            header_info = response.xpath('//div[@class="box box1200"]/div/div/div[@class="info"]')
             result = {
                 'img_url': info.xpath('./td[2]/a/img/@src').extract_first(),
                 'name_plat': header_info.xpath('./input/@value').extract_first().lower(),
@@ -56,7 +56,7 @@ class Symbol(object):
                 'volume_native': info.xpath('./td[5]/@data-native').extract_first(),
                 'percent': info.xpath('./td[6]/text()').extract_first(),
                 'time': info.xpath('./td[7]/text()').extract_first(),
-                'time_now': time,
+                'time_now': num,
             }
             yield result
 

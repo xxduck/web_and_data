@@ -37,7 +37,7 @@ def symbol_info():
     symbol = Symbol()
     mongo = Mongo()
     mongo.drop(collection='symbol')
-    for symb in mongo.read(collection='symbol_base'):
+    for symb in mongo.read(collection='symbol_entrance'):
         for i in symbol.symbol(symb['url']):
             print(i)
             mongo.write(collection='symbol', data=i)

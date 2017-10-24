@@ -22,6 +22,7 @@ class Platform(object):
 
     def __init__(self):
         self.ua = UserAgent()
+        self.time_now = round(time.time())
 
     def platform(self, url=start_url):
         """
@@ -45,6 +46,7 @@ class Platform(object):
                 'arb': li.xpath('./div/div[@class="info"]/div[@class="detal"]/a[1]/text()').extract_first(),
                 'nation': li.xpath('./div/div[@class="info"]/div[@class="detal"]/a[2]/text()').extract_first(),
                 'volume': li.xpath('./div/div[@class="info"]/div[@class="detal"]/a[4]/text()').extract_first(),
+                'time': self.time_now,
             }
             yield result
 
@@ -99,7 +101,6 @@ def get_platform_base():
     :return:
     """
     mongo = Mongo()
-    mongo.drop(collection='platform_base')
     platform = Platform()
     r = platform.platform()
     for i in r:
@@ -113,9 +114,10 @@ def get_symbol_base():
     :return:
     """
     mongo = Mongo()
-    mongo.drop(collection='symbol_base')
     symbol = Symbol()
     r = symbol.symbol()
     for i in r:
         mongo.write(collection='symbol_base', data=i)
         print(i)
+
+
