@@ -25,6 +25,7 @@ class Ticker(object):
         html = requests.get(url, headers={'User-Agent': self.ua.random})
         response = Selector(text=html.text)
         header_info = response.xpath('//div[@class="box box1200"]/div/div/div[@class="info"]')
+        vol = response.xpath('//div[@class="box box1200"]/div/div/div[@class="vol"]/div')
         response = response.xpath('//table[@class="table noBg"]/tbody/tr')
         for info in response:
             # 有些网页arb标签,name标签有特殊情况
@@ -57,6 +58,9 @@ class Ticker(object):
                 'percent': info.xpath('./td[6]/text()').extract_first(),
                 'time': info.xpath('./td[7]/text()').extract_first(),
                 'time_now': num,
+                'volume_plat_cny': vol.xpath('./div[1]/text()').extract_first(),
+                'volume_plat_usd': vol.xpath('./div[2]/span[1]/text()').extract_first(),
+                'volume_plat_btc': vol.xpath('./div[2]/span[2]/text()').extract_first(),
             }
             yield result
 

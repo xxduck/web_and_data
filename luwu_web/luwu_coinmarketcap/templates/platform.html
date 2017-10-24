@@ -40,10 +40,10 @@
                         <div class="vol">
                             <p>24小时平台成交量：</p>
                             <div class="bprice" style="margin-top: 0">
-                                <div class="num">¥4,667,793,333 <span class="tag-rank">排名<b>NO.1</b></span>
+                                <div class="num">{{ footer(body.name)[0].volume_plat_cny }} <span class="tag-rank">排名<b>NO.1</b></span>
                                 </div>
                                 <div class="num2">
-                                    <span>$701,301,000</span><span>145,794BTC  </span>
+                                    <span>{{ footer(body.name)[0].volume_plat_usd }}</span><span>{{ footer(body.name)[0].volume_plat_btc }}  </span>
                                 </div>
                             </div>
                         </div>
