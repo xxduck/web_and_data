@@ -48,3 +48,8 @@ def platform_info():
         for i in platform.platform(plat['url']):
             print(i)
             mongo.write(collection='platform', data=i)
+
+
+if __name__ == "__main__":
+    platform_info()
+

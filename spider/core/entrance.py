@@ -92,3 +92,9 @@ def run_symbol_entrance():
     for i in r:
         mongo.write(collection='symbol_entrance', data=i)
         print(i)
+
+
+if __name__ == "__main__":
+    run_symbol_entrance()
+    run_platform_entrancel()
+

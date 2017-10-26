@@ -17,7 +17,7 @@ class Mongo(object):
 
     def write(self, data, collection):
         col = self.db[collection]
-        col.insert_one(data)
+        col.insert_one(data)   #  这边在后期的优化的时候更改为insert_many
 
     def read(self, collection):
         col = self.db[collection]
@@ -26,7 +26,7 @@ class Mongo(object):
     def drop(self, collection):
         col = self.db[collection]
         col.remove()
-        print("成功更新该集合")
+        print("即将开始更新该集合，请等待")
 
 
 if __name__ == "__main__":
@@ -34,4 +34,3 @@ if __name__ == "__main__":
     n = m.read(collection='platform')
     for i in n:
         print(i)
-
